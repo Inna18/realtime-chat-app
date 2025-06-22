@@ -1,25 +1,27 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
+import { hash } from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
   try {
-    console.log(request);
     const { user, attachId } = await request.json();
-    console.log(user, attachId);
 
-    if (!user?.email || !user?.password || !user?.name) {
+    if (!user?.email || !user?.password) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
+    // hash the password
+    const hashedPassword = await hash('12345abc*', 10);
+
     const newUser = await prisma.user.create({
       data: {
         id: user.id, // optional if auto-generated
         email: user.email,
-        password: user.password,
-        name: user.name,
+        password: hashedPassword,
+        name: user.name === '' ? user.email : user.name, // if nickname null, name = email
         ...(attachId && {
           avatar: {
             connect: { id: attachId },

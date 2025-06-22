@@ -1,5 +1,8 @@
+'use client';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
+
+import { SessionProvider } from 'next-auth/react';
 
 export const montserrat = Montserrat({
   subsets: ['latin'],
@@ -14,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable}`}>{children}</body>
+      <body className={`${montserrat.variable}`}>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
