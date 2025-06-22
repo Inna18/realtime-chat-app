@@ -1,16 +1,15 @@
-interface User {
-  id: string | null;
+export interface User {
+  id?: string | null;
   email: string;
+  password: string;
   name: string;
-  messages: Message[] | null;
+  avatar?: string;
 }
 
-interface Message {
+export interface Message {
   id: string;
   content: string;
   createdAt: Date;
   sender: User;
   senderId: string;
 }
-
-export { User, Message };
