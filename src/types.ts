@@ -11,6 +11,13 @@ export interface User {
   avatar?: string;
 }
 
+export interface Room {
+  id?: string | null;
+  name: string;
+  creator: string;
+  createdAt: string;
+}
+
 export interface Message {
   id: string;
   content: string;

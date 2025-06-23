@@ -5,7 +5,8 @@ import {
   passwordValidationRegex,
 } from '@/utils/formValidation';
 import React, { useState } from 'react';
-import { signup, upload } from '@/service/auth/auth';
+import { signup, upload } from '@/service/auth';
+import { useRouter } from 'next/navigation';
 
 const DEFAULT_USER = {
   email: '',
@@ -21,6 +22,7 @@ const DEFAULT_ERROR = {
 };
 
 const SignupForm = () => {
+  const router = useRouter();
   const [credentials, setCredentials] = useState<User>(DEFAULT_USER);
   const [repeatPassword, setRepeatPassword] = useState<string>('');
   const [formError, setFormError] =
@@ -107,7 +109,7 @@ const SignupForm = () => {
     if (!isSubmit) return;
 
     const res = await signup(credentials, fileId);
-    console.log(res.data);
+    if (res.status === 200) router.push('/login');
   };
 
   const handleSetFormError = (key: string, value: string) => {

@@ -3,6 +3,7 @@ import NavLink from '@/components/NavLink';
 import { Credentials } from '@/types';
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const DEFAULT_LOGIN_CREDENTIALS = {
   email: '',
@@ -10,6 +11,7 @@ const DEFAULT_LOGIN_CREDENTIALS = {
 };
 
 const Login = () => {
+  const router = useRouter();
   const [loginCredentials, setLoginCredentials] = useState<Credentials>(
     DEFAULT_LOGIN_CREDENTIALS
   );
@@ -37,6 +39,7 @@ const Login = () => {
       email: loginCredentials.email,
       password: loginCredentials.password,
     });
+    if (res?.ok) router.push('/rooms/list');
   };
 
   return (
@@ -48,7 +51,7 @@ const Login = () => {
         <h3>Login</h3>
         <div className="flex flex-col">
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             value={loginCredentials.email}
             onInput={(e: React.FormEvent<HTMLInputElement>) =>
@@ -56,7 +59,7 @@ const Login = () => {
             }
           />
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             value={loginCredentials.password}
             onInput={(e: React.FormEvent<HTMLInputElement>) =>
