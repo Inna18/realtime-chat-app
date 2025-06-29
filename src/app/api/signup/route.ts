@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         id: user.id, // optional if auto-generated
         email: user.email,
         password: hashedPassword,
-        name: user.name === '' ? user.email : user.name, // if nickname null, name = email
+        name: user.name === '' ? user.email.split('@')[0] : user.name, // if nickname null, name = email
         ...(attachId && {
           avatar: {
             connect: { id: attachId },

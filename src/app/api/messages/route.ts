@@ -17,6 +17,11 @@ export async function POST(req: NextRequest) {
       roomId,
       senderId: session.user.id,
     },
+    include: {
+      sender: {
+        select: { name: true },
+      },
+    },
   });
 
   await pusherServer.trigger(`chat-${roomId}`, 'new-message', message);

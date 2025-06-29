@@ -9,7 +9,18 @@ export async function GET(
 
   const room = await prisma.room.findUnique({
     where: { id: id },
-    include: { messages: true },
+    include: {
+      messages: {
+        include: {
+          sender: {
+            select: {
+              name: true, // Include sender's name
+            },
+          },
+        },
+        orderBy: { createdAt: 'asc' }, // Optional: sort messages chronologically
+      },
+    },
   });
 
   if (!room) {

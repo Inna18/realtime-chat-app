@@ -14,6 +14,7 @@ export interface User {
 export interface Room {
   id?: string | null;
   name: string;
+  messages: Message[];
   creatorId: string;
   createdAt: string;
 }

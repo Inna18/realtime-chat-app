@@ -6,16 +6,17 @@ import { createMessage } from '@/service/message';
 
 interface Props {
   roomId: string;
+  chatMessages: Message[];
 }
 
-const Chatting = ({ roomId }: Props) => {
+const Chatting = ({ roomId, chatMessages }: Props) => {
+  const [messages, setMessages] = useState<Message[]>(chatMessages);
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
     const channel = pusherClient.subscribe(`chat-${roomId}`);
     channel.bind('new-message', (message: Message) => {
-      // Append message to UI
-      console.log(message);
+      setMessages((prevState: Message[]) => [...prevState, message]);
     });
 
     return () => {
@@ -29,14 +30,26 @@ const Chatting = ({ roomId }: Props) => {
     setMessage(val);
   };
 
+  const handleSend = () => {
+    createMessage(message, roomId);
+    setMessage('');
+  };
+
   return (
     <>
       <div className="w-[600px] h-[600px] bg-[#808080]">
-        [Chat Messages will be here]
+        {messages &&
+          messages.map((message: Message) => (
+            <div key={message.id}>
+              <div>{message.sender?.name}</div>
+              <div>{message.createdAt.toString()}</div>
+              <div key={message.id}>{message.content}</div>
+            </div>
+          ))}
       </div>
       <div>
         <input value={message} onInput={handleInput} />
-        <button onClick={() => createMessage(message, roomId)}>Send</button>
+        <button onClick={handleSend}>Send</button>
       </div>
     </>
   );
