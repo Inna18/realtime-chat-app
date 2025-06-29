@@ -1,9 +1,11 @@
 'use client';
 import { createRoom } from '@/service/room';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const Rooms = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [roomName, setRoomName] = useState<string>('');
 
@@ -14,7 +16,8 @@ const Rooms = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createRoom(session?.user.id, roomName);
+    const res = await createRoom(session?.user.id, roomName);
+    if (res.status === 200) router.push('/rooms/list');
   };
 
   return (

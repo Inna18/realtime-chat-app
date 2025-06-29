@@ -14,7 +14,7 @@ export interface User {
 export interface Room {
   id?: string | null;
   name: string;
-  creator: string;
+  creatorId: string;
   createdAt: string;
 }
 
