@@ -3,14 +3,17 @@ import React from 'react';
 import Link from 'next/link';
 
 interface Props {
+  style: string;
   url: string;
   label: string;
 }
 
-const NavLink = ({ url, label }: Props) => {
+const NavLink = ({ style, url, label }: Props) => {
   return (
     <div>
-      <Link href={`${url}`}>{label}</Link>
+      <Link className={style} href={`${url}`}>
+        {label}
+      </Link>
     </div>
   );
 };
