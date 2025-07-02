@@ -60,6 +60,8 @@ model Message {
 model Room {
   id String @id @default(cuid())
   name String
+  description String
+  tags String
   messages Message[]
   createdAt DateTime @default(now())
   creator User @relation("UserRoomsCreated", fields: [creatorId], references: [id])

@@ -1,9 +1,10 @@
+import { Room } from '@/types';
 import axios from 'axios';
 
-export async function createRoom(userId: string, name: string) {
+export async function createRoom(userId: string, roomDetails: Room) {
   return await axios.post(
     '/api/rooms',
-    { userId, name },
+    { userId, ...roomDetails },
     {
       headers: {
         'Content-Type': 'application/json',
