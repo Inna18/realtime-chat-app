@@ -137,12 +137,12 @@ const Signup = () => {
   return (
     <>
       {status === 'unauthenticated' && (
-        <div className="flex justify-center h-screen bg-[#E0E0E0]">
+        <div className="flex justify-center h-screen bg-[#e0e0e0] dark:bg-[#2e2a2a]">
           <form
             onSubmit={handleSignup}
-            className="flex flex-col items-center w-[600px] h-[600px] bg-[#fff] mt-[160px] rounded-[40px] p-[80px]"
+            className="flex flex-col items-center w-[600px] h-[600px] bg-[#fff] dark:bg-[#4a4a4a] mt-[160px] rounded-[40px] p-[80px]"
           >
-            <h3 className="text-[36px]">Create your account</h3>
+            <h3 className="text-[#a8a8a8] text-[36px]">Create your account</h3>
             <div className="flex flex-col my-[30px]">
               <div className="mb-[10px]">
                 <Input
@@ -153,7 +153,7 @@ const Signup = () => {
                     handleInput(e, 'email')
                   }
                 />
-                <div className="text-[#7836FF] text-[12px]">
+                <div className="text-[#7836FF] dark:text-[#e0e0e0] text-[12px]">
                   {formError.email}
                 </div>
               </div>
@@ -166,7 +166,7 @@ const Signup = () => {
                     handleInput(e, 'password')
                   }
                 />
-                <div className="text-[#7836FF] text-[12px]">
+                <div className="text-[#7836FF] dark:text-[#e0e0e0] text-[12px]">
                   {formError.password}
                 </div>
               </div>
@@ -179,7 +179,7 @@ const Signup = () => {
                     handleRepeatPassword(e)
                   }
                 />
-                <div className="text-[#7836FF] text-[12px]">
+                <div className="text-[#7836FF] dark:text-[#e0e0e0] text-[12px]">
                   {formError.repeatPassword}
                 </div>
               </div>
@@ -192,14 +192,14 @@ const Signup = () => {
                     handleInput(e, 'name')
                   }
                 />
-                <div className="text-[#7836FF] text-[12px]">
+                <div className="text-[#7836FF] dark:text-[#e0e0e0] text-[12px]">
                   {formError.name}
                 </div>
               </div>
               <div className="my-[20px] flex justify-between">
                 <label
                   htmlFor="file-upload"
-                  className="inline-flex items-center justify-center border-none bg-white text-[#7836FF] cursor-pointer px-4 py-2 text-[13px]"
+                  className="inline-flex items-center justify-center border-none bg-white text-[#7836FF] dark:text-[#e0e0e0] cursor-pointer px-4 py-2 text-[13px]"
                 >
                   Choose File
                 </label>
@@ -228,7 +228,7 @@ const Signup = () => {
                 Already have an account?
               </span>
               <NavLink
-                style={'text-[#7836FF] text-[12px] bold'}
+                style={'text-[#7836FF] dark:text-[#e0e0e0] text-[12px] bold'}
                 url={'/login'}
                 label={'Sign In'}
               />

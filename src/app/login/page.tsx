@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import NavLink from '@/components/NavLink';
 import Image from 'next/image';
 import { Credentials } from '@/types';
@@ -66,15 +66,17 @@ const Login = () => {
   return (
     <>
       {status === 'unauthenticated' && (
-        <div className="flex justify-center h-screen bg-[#E0E0E0]">
+        <div className="flex justify-center h-screen bg-[#e0e0e0] dark:bg-[#2e2a2a]">
           <form
-            className="flex w-[56%] h-[60%] min-w-[968px] min-h-[561px] bg-[#fff] mt-[160px] rounded-[40px]"
+            className="flex w-[56%] h-[60%] min-w-[968px] min-h-[561px] bg-[#fff] dark:bg-[#4a4a4a] mt-[160px] rounded-[40px]"
             onSubmit={handleLogin}
           >
             <div className="w-[50%] p-[80px]">
               <div className="mb-[60px]">
-                <h3 className="text-[46px]">Hello,</h3>
-                <h3 className="text-[36px]">Welcome Back</h3>
+                <h3 className="text-[#a8a8a8] dark:text-[#e0e0e0] text-[46px]">
+                  Hello,
+                </h3>
+                <h3 className="text-[#e0e0e0] text-[36px]">Welcome Back</h3>
               </div>
               <div className="flex flex-col">
                 <div className="mb-[10px]">
@@ -107,7 +109,7 @@ const Login = () => {
                   Don&apos;t Have An Account? Go
                 </span>
                 <NavLink
-                  style={'text-[#7836FF] text-[12px] bold'}
+                  style={'text-[#7836FF] dark:text-[#e0e0e0] text-[12px] bold'}
                   url={'/signup'}
                   label={'Sign Up'}
                 />
