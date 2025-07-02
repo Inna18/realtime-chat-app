@@ -4,7 +4,7 @@ import NavLink from '@/components/NavLink';
 import Image from 'next/image';
 import { Credentials } from '@/types';
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 
@@ -14,17 +14,12 @@ const DEFAULT_LOGIN_CREDENTIALS = {
 };
 
 const Login = () => {
+  const searchParams = useSearchParams();
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loginCredentials, setLoginCredentials] = useState<Credentials>(
     DEFAULT_LOGIN_CREDENTIALS
   );
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.replace('/'); // or your homepage
-    }
-  }, [status, router]);
 
   if (status === 'loading') {
     return null; // or a loading spinner
@@ -52,7 +47,20 @@ const Login = () => {
       email: loginCredentials.email,
       password: loginCredentials.password,
     });
-    if (res?.ok) router.push('/rooms/list');
+
+    const rawCallbackUrl = searchParams.get('callbackUrl');
+    const callbackUrl = rawCallbackUrl
+      ? decodeURIComponent(rawCallbackUrl)
+      : null;
+    console.log('callbackUrl:', callbackUrl);
+
+    if (res?.ok) {
+      if (callbackUrl && callbackUrl.startsWith('/')) {
+        router.push(callbackUrl);
+      } else {
+        router.push('/rooms/list');
+      }
+    }
   };
 
   return (
