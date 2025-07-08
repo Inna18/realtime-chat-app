@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <>
       {status !== 'loading' && status !== 'unauthenticated' && (
-        <div className="flex justify-between bg-[#7836FF] h-[68px] rounded-b-[10px] p-[10px]">
+        <div className="flex justify-between bg-[#7836FF] h-[68px] p-[10px]">
           <div className="flex items-center">
             {session?.user?.id && (
               <Image

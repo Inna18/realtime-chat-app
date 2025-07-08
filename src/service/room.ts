@@ -13,6 +13,10 @@ export async function createRoom(userId: string, roomDetails: Room) {
   );
 }
 
+export async function deleteRoom(id: string) {
+  return await axios.delete(`/api/rooms/${id}`);
+}
+
 export async function fetchAllRooms() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/rooms/list`);
   return await res.json();

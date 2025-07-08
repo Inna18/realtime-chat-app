@@ -9,12 +9,12 @@ const RoomList = async () => {
   const rooms: Room[] = await fetchAllRooms();
 
   return (
-    <div className="h-screen bg-[#fff] py-[40px] px-[60px]">
+    <div className="h-screen bg-[#fff] py-[32px] px-[60px]">
       <div className="flex justify-end">
         <NavLink
           label={'New Room'}
           url={'/rooms'}
-          style={'text-[#7836FF] dark:text-[#e0e0e0] text-[14px]'}
+          style={'text-[#7836FF] dark:text-[#e0e0e0] text-[16px] font-[500]'}
         />
       </div>
       {rooms.length <= 0 && <div>No rooms yet</div>}

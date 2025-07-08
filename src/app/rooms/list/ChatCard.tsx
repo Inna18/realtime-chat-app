@@ -1,23 +1,41 @@
+'use client';
 import { Room } from '@/types';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { deleteRoom } from '@/service/room';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   room: Room;
 }
 
 const ChatCard = ({ room }: Props) => {
+  const router = useRouter();
+
+  const handleDelete = async (id: string) => {
+    await deleteRoom(id);
+    router.refresh();
+  };
+
   return (
     <li
       key={room.id}
-      className="bg-[#FBE7D7] w-[220px] h-[130px] p-[6px] m-[20px] rounded-[10px]"
+      className="relative group bg-[#FBE7D7] w-[220px] h-[142px] pt-[16px] p-[6px] m-[20px] rounded-[10px]"
       style={{
         boxShadow: '0px 2px 6px 0px #e0e0e0', // light gray shadow
       }}
     >
+      <div className="absolute bg-[#fff] right-[6px] top-[4px] hidden group-hover:block rounded-t-[4px] cursor-pointer">
+        <Image
+          src={'/ic-close.svg'}
+          alt={'Close icon'}
+          width={14}
+          height={12}
+          onClick={() => handleDelete(room.id!)}
+        />
+      </div>
       <Link href={`/rooms/${room.id}`}>
-        <div></div>
         <div className="bg-[#fff] h-[90px] p-[10px] rounded-[10px]">
           <h3 className="text-[#4a4a4a] text-[16px] my-[4px]">{room.name}</h3>
           <p

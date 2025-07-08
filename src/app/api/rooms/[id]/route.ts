@@ -30,3 +30,18 @@ export async function GET(
 
   return NextResponse.json(room);
 }
+
+export async function DELETE(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const { id } = context.params;
+
+  await prisma.message.deleteMany({ where: { roomId: id } });
+
+  const deletedRoom = await prisma.room.delete({
+    where: { id },
+  });
+
+  return NextResponse.json({ success: true, deletedRoom });
+}
