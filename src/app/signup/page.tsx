@@ -137,12 +137,13 @@ const Signup = () => {
   return (
     <>
       {status === 'unauthenticated' && (
-        <div className="flex justify-center h-screen bg-[#e0e0e0] dark:bg-[#2e2a2a]">
+        <div className="flex justify-center h-screen">
           <form
             onSubmit={handleSignup}
-            className="flex flex-col items-center w-[600px] h-[600px] bg-[#fff] dark:bg-[#4a4a4a] mt-[160px] rounded-[40px] p-[80px]"
+            className="flex flex-col items-center w-[600px] h-[600px] bg-[#fff] dark:bg-[#4a4a4a] 
+            mt-[160px] rounded-[40px] p-[80px] shadow-[0_10px_35px_rgba(0,0,0,0.1)]"
           >
-            <h3 className="text-[#a8a8a8] text-[36px]">Create your account</h3>
+            <h3 className="text-[#4a4a4a] text-[36px]">Create your account</h3>
             <div className="flex flex-col my-[30px]">
               <div className="mb-[10px]">
                 <Input

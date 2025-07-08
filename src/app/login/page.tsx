@@ -66,14 +66,15 @@ const Login = () => {
   return (
     <>
       {status === 'unauthenticated' && (
-        <div className="flex justify-center h-screen bg-[#e0e0e0] dark:bg-[#2e2a2a]">
+        <div className="flex justify-center h-screen">
           <form
-            className="flex w-[56%] h-[60%] min-w-[968px] min-h-[561px] bg-[#fff] dark:bg-[#4a4a4a] mt-[160px] rounded-[40px]"
+            className="flex w-[56%] h-[60%] min-w-[968px] min-h-[561px] bg-[#fff] dark:bg-[#4a4a4a] 
+            mt-[160px] rounded-[40px] shadow-[0_10px_35px_rgba(0,0,0,0.1)]"
             onSubmit={handleLogin}
           >
             <div className="w-[50%] p-[80px]">
               <div className="mb-[60px]">
-                <h3 className="text-[#a8a8a8] dark:text-[#e0e0e0] text-[46px]">
+                <h3 className="text-[#4a4a4a] dark:text-[#e0e0e0] text-[46px]">
                   Hello,
                 </h3>
                 <h3 className="text-[#e0e0e0] text-[36px]">Welcome Back</h3>
@@ -118,7 +119,7 @@ const Login = () => {
             <div className="relative w-[50%]">
               <Image
                 src="/img-login.png"
-                alt={'next'}
+                alt="Logo Image"
                 fill
                 style={{
                   borderTopRightRadius: '40px',

@@ -3,7 +3,7 @@ import { createRoom } from '@/service/room';
 import { Room } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const DEFAULT_ROOM: Room = {
   name: '',
@@ -23,7 +23,7 @@ const Rooms = () => {
     } else if (type === 'description') {
       set = { description: val };
     } else if (type === 'tags') {
-      set = { tags: val };
+      set = { tags: val.trim() };
     }
     setRoomDetails((prevState: Room) => ({
       ...prevState,

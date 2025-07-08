@@ -12,7 +12,11 @@ export async function middleware(req: NextRequest) {
   if (
     PUBLIC_PATHS.includes(pathname) ||
     pathname.startsWith('/_next') ||
-    pathname === '/favicon.ico'
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/fonts') ||
+    pathname.startsWith('/img') || // your image path
+    pathname.match(/\.(.*)\.(png|jpg|jpeg|svg|webp|gif)$/)
   ) {
     return NextResponse.next();
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '@/components/RouteButton';
-import Link from 'next/link';
+import NavLink from '@/components/NavLink';
+import ChatCard from './ChatCard';
 
 import { fetchAllRooms } from '@/service/room';
 import { Room } from '@/types';
@@ -9,16 +9,19 @@ const RoomList = async () => {
   const rooms: Room[] = await fetchAllRooms();
 
   return (
-    <div>
-      <Button label={'New Room'} url={'/rooms'} />
-      <h3>Rooms</h3>
+    <div className="h-screen bg-[#fff] py-[40px] px-[60px]">
+      <div className="flex justify-end">
+        <NavLink
+          label={'New Room'}
+          url={'/rooms'}
+          style={'text-[#7836FF] dark:text-[#e0e0e0] text-[14px]'}
+        />
+      </div>
       {rooms.length <= 0 && <div>No rooms yet</div>}
       {rooms.length > 0 && (
-        <ul>
+        <ul className="flex flex-wrap gap-4">
           {rooms.map((room: Room) => (
-            <li key={room.id}>
-              <Link href={`/rooms/${room.id}`}>{room.name}</Link>
-            </li>
+            <ChatCard key={room.id} room={room} />
           ))}
         </ul>
       )}
