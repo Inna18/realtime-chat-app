@@ -1,10 +1,11 @@
 'use client';
 import { Room } from '@/types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { deleteRoom } from '@/service/room';
 import { useRouter } from 'next/navigation';
+import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
   room: Room;
@@ -12,18 +13,28 @@ interface Props {
 
 const ChatCard = ({ room }: Props) => {
   const router = useRouter();
+  const [cardColor, setCardColor] = useState<string>();
 
   const handleDelete = async (id: string) => {
     await deleteRoom(id);
     router.refresh();
   };
 
+  useEffect(() => {
+    const milliseconds = Date.now() - new Date(room.createdAt!).getTime();
+    const hours = milliseconds / 3600000;
+    if (hours <= 1) setCardColor('#e8fac4');
+    else if (hours > 1 && hours < 24) setCardColor('#FDEBDB');
+    else setCardColor('#FACCC2');
+  }, []);
+
   return (
     <li
       key={room.id}
-      className="relative group bg-[#FBE7D7] w-[220px] h-[142px] pt-[16px] p-[6px] m-[20px] rounded-[10px]"
+      className="relative group w-[220px] h-[142px] pt-[16px] p-[6px] m-[20px] rounded-[10px]"
       style={{
         boxShadow: '0px 2px 6px 0px #e0e0e0', // light gray shadow
+        backgroundColor: cardColor,
       }}
     >
       <div className="absolute bg-[#fff] right-[6px] top-[4px] hidden group-hover:block rounded-t-[4px] cursor-pointer">
@@ -76,8 +87,11 @@ const ChatCard = ({ room }: Props) => {
           </ul>
         </div>
       </Link>
-      <span className="flex justify-center text-[12px] mt-[10px]">
-        CREATED 2 DAYS AGO
+      <span className="flex justify-center text-[10px] mt-[12px]">
+        CREATED{' '}
+        {formatDistanceToNow(new Date(room.createdAt!), {
+          addSuffix: true,
+        }).toUpperCase()}
       </span>
     </li>
   );

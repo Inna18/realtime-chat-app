@@ -9,7 +9,7 @@ const RoomList = async () => {
   const rooms: Room[] = await fetchAllRooms();
 
   return (
-    <div className="h-screen bg-[#fff] py-[32px] px-[60px]">
+    <div className="h-[calc(100vh-68px)] bg-[#fff] py-[32px] px-[60px]">
       <div className="flex justify-end">
         <NavLink
           label={'New Room'}
