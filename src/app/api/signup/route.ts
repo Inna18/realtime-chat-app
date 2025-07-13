@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
         email: user.email,
         password: hashedPassword,
         name: user.name === '' ? user.email.split('@')[0] : user.name, // if nickname null, name = email
+        status: 'offline',
         ...(attachId && {
           avatar: {
             connect: { id: attachId },

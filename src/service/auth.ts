@@ -20,3 +20,15 @@ export async function signup(body: User, attachmentId: string | null) {
     }
   );
 }
+
+export async function login(userId: string) {
+  return await axios.post(
+    '/api/login',
+    { userId },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+}

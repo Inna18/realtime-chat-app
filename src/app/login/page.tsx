@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavLink from '@/components/NavLink';
 import Image from 'next/image';
 import { Credentials } from '@/types';
@@ -7,6 +7,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import { login } from '@/service/auth';
 
 const DEFAULT_LOGIN_CREDENTIALS = {
   email: '',
@@ -20,6 +21,20 @@ const Login = () => {
   const [loginCredentials, setLoginCredentials] = useState<Credentials>(
     DEFAULT_LOGIN_CREDENTIALS
   );
+
+  useEffect(() => {
+    if (!session) return;
+
+    const doLogin = async () => {
+      try {
+        await login(session.user.id);
+      } catch (error) {
+        console.error('Login failed:', error);
+      }
+    };
+
+    doLogin();
+  }, [session]);
 
   if (status === 'loading') {
     return null; // or a loading spinner

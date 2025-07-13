@@ -20,6 +20,7 @@ model User {
   password String
   emailVerified  DateTime?
   name String
+  status String
   messages Message[]
   roomsCreated Room[] @relation("UserRoomsCreated") // Room relation
   avatar Attachment? @relation("UserAvatar") // Attachment relation
