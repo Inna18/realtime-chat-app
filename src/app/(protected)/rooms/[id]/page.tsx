@@ -3,6 +3,7 @@ import Chatting from '@/components/Chatting';
 import NavLink from '@/components/NavLink';
 import { fetchRoom } from '@/service/room';
 import { Room } from '@/types';
+import Participants from '@/components/Participants';
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -38,11 +39,7 @@ const page = async ({ params }: { params: { id: string } }) => {
                   />
                 )}
               </div>
-              <div className="w-[30%] px-[10px] py-[10px]">
-                <h3 className="py-[10px] border-b border-[#a8a8a8]">
-                  Participants
-                </h3>
-              </div>
+              <Participants />
             </div>
           </div>
         </div>

@@ -1,9 +1,21 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
+export async function GET() {
+  try {
+    const onlineUsers = await prisma.user.findMany({
+      where: {
+        status: 'online',
+      },
+    });
+
+    return NextResponse.json(onlineUsers);
+  } catch (e) {}
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { userId } = await req.json();
+    const { userId, status } = await req.json();
 
     if (!userId) {
       return NextResponse.json({ error: 'Missing userId' }, { status: 400 });
@@ -11,9 +23,7 @@ export async function POST(req: NextRequest) {
 
     await prisma.user.update({
       where: { id: userId },
-      data: {
-        status: 'online',
-      },
+      data: { status },
     });
 
     return NextResponse.json(

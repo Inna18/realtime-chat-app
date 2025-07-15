@@ -2,9 +2,15 @@
 import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
+import { changeStatus } from '@/service/auth';
 
 const Header = () => {
   const { data: session, status } = useSession();
+
+  const handleSignout = async () => {
+    signOut();
+    await changeStatus(session.user.id, 'offline');
+  };
 
   return (
     <>
@@ -27,8 +33,8 @@ const Header = () => {
           </div>
 
           <button
-            className="border-none bg-[#7836FF] text-[#FFF] mx-[4px]"
-            onClick={() => signOut()}
+            className="border-none bg-[#7836FF] text-[#FFF] mx-[4px] cursor-pointer"
+            onClick={handleSignout}
           >
             SIGN OUT
           </button>

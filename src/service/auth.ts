@@ -21,10 +21,10 @@ export async function signup(body: User, attachmentId: string | null) {
   );
 }
 
-export async function login(userId: string) {
+export async function changeStatus(userId: string, status: string) {
   return await axios.post(
-    '/api/login',
-    { userId },
+    '/api/user',
+    { userId, status },
     {
       headers: {
         'Content-Type': 'application/json',
@@ -32,3 +32,13 @@ export async function login(userId: string) {
     }
   );
 }
+
+export async function getParticipants() {
+  return await axios.get('/api/user', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+
