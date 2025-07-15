@@ -7,16 +7,19 @@ const PUBLIC_PATHS = ['/login', '/signup'];
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  console.log(pathname);
-  // Allow public pages
+  // Normalize trailing slash
+  const isPublic = PUBLIC_PATHS.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  );
+
   if (
-    PUBLIC_PATHS.includes(pathname) ||
+    isPublic ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/favicon.ico') ||
     pathname.startsWith('/fonts') ||
-    pathname.startsWith('/img') || // your image path
-    pathname.match(/\.(.*)\.(png|jpg|jpeg|svg|webp|gif)$/)
+    pathname.startsWith('/img') ||
+    pathname.match(/\.(png|jpg|jpeg|svg|webp|gif|ico|css|js)$/)
   ) {
     return NextResponse.next();
   }
@@ -25,7 +28,7 @@ export async function middleware(req: NextRequest) {
 
   if (!token) {
     const loginUrl = new URL('/login', req.url);
-    loginUrl.searchParams.set('callbackUrl', pathname); // after login - redirect to intended url
+    loginUrl.searchParams.set('callbackUrl', req.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -33,5 +36,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!_next|api|favicon.ico|fonts|img|login|signup).*)'],
 };

@@ -2,8 +2,9 @@
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 
-import { SessionProvider, useSession } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 import Header from '@/components/Header';
+import { useEffect } from 'react';
 
 export const montserrat = Montserrat({
   subsets: ['latin'],
@@ -16,6 +17,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    console.log('AuthLayout mounted'); // in (auth)/layout.tsx
+  }, []);
   return (
     <html lang="en">
       <body className={`${montserrat.variable}`}>

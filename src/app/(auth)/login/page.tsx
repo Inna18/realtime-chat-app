@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import NavLink from '@/components/NavLink';
 import Image from 'next/image';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
 import { Credentials } from '@/types';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
 import { login } from '@/service/auth';
 
 const DEFAULT_LOGIN_CREDENTIALS = {

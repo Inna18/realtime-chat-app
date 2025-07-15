@@ -46,8 +46,9 @@ const ChatCard = ({ room }: Props) => {
           onClick={() => handleDelete(room.id!)}
         />
       </div>
-      <Link href={`/rooms/${room.id}`}>
-        <div className="bg-[#fff] h-[90px] p-[10px] rounded-[10px]">
+
+      <div className="flex justify-between bg-[#fff] h-[90px] p-[10px] rounded-[10px]">
+        <div>
           <h3 className="text-[#4a4a4a] text-[16px] my-[4px]">{room.name}</h3>
           <p
             className="text-[#a8a8a8] text-[12px] overflow-hidden"
@@ -86,7 +87,15 @@ const ChatCard = ({ room }: Props) => {
             ))}
           </ul>
         </div>
-      </Link>
+        <Link className="flex items-center" href={`/rooms/${room.id}`}>
+          <Image
+            src={'/ic-enter.svg'}
+            alt={'Enter icon'}
+            width={20}
+            height={20}
+          />
+        </Link>
+      </div>
       <span className="flex justify-center text-[10px] mt-[12px]">
         CREATED{' '}
         {formatDistanceToNow(new Date(room.createdAt!), {
