@@ -21,10 +21,10 @@ export async function signup(body: User, attachmentId: string | null) {
   );
 }
 
-export async function changeStatus(userId: string, status: string) {
+export async function login(userId: string) {
   return await axios.post(
     '/api/user',
-    { userId, status },
+    { userId },
     {
       headers: {
         'Content-Type': 'application/json',

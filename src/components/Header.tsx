@@ -2,14 +2,12 @@
 import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
-import { changeStatus } from '@/service/auth';
 
 const Header = () => {
   const { data: session, status } = useSession();
 
   const handleSignout = async () => {
     signOut();
-    await changeStatus(session.user.id, 'offline');
   };
 
   return (

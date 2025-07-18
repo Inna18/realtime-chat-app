@@ -15,7 +15,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, status } = await req.json();
+    const { userId } = await req.json();
 
     if (!userId) {
       return NextResponse.json({ error: 'Missing userId' }, { status: 400 });
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
     await prisma.user.update({
       where: { id: userId },
-      data: { status },
+      data: { status: 'online', lastLogin: new Date() },
     });
 
     return NextResponse.json(

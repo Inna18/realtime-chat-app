@@ -7,7 +7,7 @@ import Input from '@/components/Input';
 import { Credentials } from '@/types';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { changeStatus } from '@/service/auth';
+import { login } from '@/service/auth';
 
 const DEFAULT_LOGIN_CREDENTIALS = {
   email: '',
@@ -27,7 +27,7 @@ const Login = () => {
 
     const doLogin = async () => {
       try {
-        await changeStatus(session.user.id, 'online');
+        await login(session.user.id);
       } catch (error) {
         console.error('Login failed:', error);
       }
