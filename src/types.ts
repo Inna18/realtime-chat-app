@@ -1,9 +1,9 @@
-export interface Credentials {
+interface Credentials {
   email: string;
   password: string;
 }
 
-export interface User {
+interface User {
   id?: string | null;
   email: string;
   password: string;
@@ -11,7 +11,7 @@ export interface User {
   avatar?: string;
 }
 
-export interface Room {
+interface Room {
   id?: string | null;
   name: string;
   description: string;
@@ -21,10 +21,12 @@ export interface Room {
   createdAt?: string;
 }
 
-export interface Message {
+interface Message {
   id: string;
   content: string;
   createdAt: Date;
   sender: User;
   senderId: string;
 }
+
+export type { Credentials, User, Room, Message };
